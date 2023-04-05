@@ -77,6 +77,13 @@ INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
 WHERE ingredient.id_ingredient = '24'
 
 -- 13. NOM DU/DES LIEU/X POSSÉDANT LE PLUS D'HABITANTS, EN DEHORS DU VILLAGE GAULOIS
+SELECT nom_lieu AS 'Lieu', COUNT(lieu.id_lieu) AS "Nombre d'habitant(s)"
+FROM lieu
+INNER JOIN personnage ON lieu.id_lieu = personnage.id_lieu
+WHERE NOT lieu.id_lieu = '1'
+GROUP BY nom_lieu
+ORDER BY COUNT(lieu.id_lieu) DESC
+LIMIT 1
 
 
 -- 14. NOM DES PERSONNAGES QUI N'ONT JAMAIS BU DE POTION
