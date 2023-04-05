@@ -85,9 +85,15 @@ GROUP BY nom_lieu
 ORDER BY COUNT(lieu.id_lieu) DESC
 LIMIT 1
 
-
 -- 14. NOM DES PERSONNAGES QUI N'ONT JAMAIS BU DE POTION
-
+-- A TERMINER
+SELECT nom_personnage AS "Personnage n'ayant jamais bu de potion"
+FROM personnage
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage
+WHERE 
+GROUP BY dose_boire, personnage.id_personnage
+ORDER BY dose_boire DESC
 
 -- 15. NOM DU/DES PERSONNAGE/S QUI N'ONT PAS LE DROIT DE BOIRE DE LA POTION 'Magique'
-
+-- A FAIRE
+-- Théorie: SELECT nom_personnages FROM personnage WHERE pas présent dans la table autoriser_boire
