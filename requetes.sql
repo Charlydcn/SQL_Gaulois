@@ -63,7 +63,11 @@ ORDER BY qte DESC
 LIMIT 1
 
 -- 11. COMBIEN DE CASQUES PAR TYPE ET QUEL COÛT TOTAL (classé par nombre décroissant)
-
+SELECT nom_type_casque AS 'Type de casque', COUNT(id_casque) AS 'Nombre de casques', SUM(cout_casque) AS 'Coût total'
+FROM type_casque
+INNER JOIN casque ON type_casque.id_type_casque = casque.id_type_casque
+GROUP BY nom_type_casque
+ORDER BY SUM(cout_casque) DESC
 
 -- 12. NOM DES POTIONS DONT UN DES INGRÉDIENTS EST LE POISSON FRAIS
 
