@@ -70,7 +70,11 @@ GROUP BY nom_type_casque
 ORDER BY SUM(cout_casque) DESC
 
 -- 12. NOM DES POTIONS DONT UN DES INGRÉDIENTS EST LE POISSON FRAIS
-
+SELECT nom_potion AS 'Potion'
+FROM potion
+INNER JOIN composer ON potion.id_potion = composer.id_potion
+INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
+WHERE ingredient.id_ingredient = '24'
 
 -- 13. NOM DU/DES LIEU/X POSSÉDANT LE PLUS D'HABITANTS, EN DEHORS DU VILLAGE GAULOIS
 
