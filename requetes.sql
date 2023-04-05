@@ -55,7 +55,12 @@ GROUP BY dose_boire, personnage.id_personnage
 ORDER BY dose_boire DESC
 
 -- 10. NOM DE LA BATAILLE OU LE NOMBRE DE CASQUES PRIS A ÉTÉ LE PLUS IMPORTANT
-
+SELECT nom_bataille AS 'Bataille', qte AS 'Nombre de casques volés'
+FROM bataille
+INNER JOIN prendre_casque ON prendre_casque.id_bataille = bataille.id_bataille
+GROUP BY qte, nom_bataille
+ORDER BY qte DESC
+LIMIT 1
 
 -- 11. COMBIEN DE CASQUES PAR TYPE ET QUEL COÛT TOTAL (classé par nombre décroissant)
 
