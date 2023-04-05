@@ -48,7 +48,11 @@ ORDER BY prendre_casque.qte DESC
 LIMIT 1
 
 -- 9. NOM DES PERSONNAGES ET LEUR QUANTITÉ DE POTION BUE (classé du plus grand buveur au plus petit)
-
+SELECT nom_personnage AS 'Personnage', dose_boire AS 'Doses bues'
+FROM personnage
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage
+GROUP BY dose_boire, personnage.id_personnage
+ORDER BY dose_boire DESC
 
 -- 10. NOM DE LA BATAILLE OU LE NOMBRE DE CASQUES PRIS A ÉTÉ LE PLUS IMPORTANT
 
