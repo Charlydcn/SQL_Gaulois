@@ -169,10 +169,21 @@ id_lieu = (
 WHERE nom_personnage = 'Zérozérosix'
 
 -- E². La potion 'Soupe' id 8 doit contenir du persil id 19. 
-
+INSERT INTO composer (id_potion, id_ingredient, qte)
+VALUES ('8', '19', '15')
 
 -- E. La potion 'Soupe' ne doit plus contenir de persil.
-
+DELETE FROM composer
+WHERE id_potion = (
+	SELECT id_potion
+	FROM potion
+	WHERE nom_potion = 'Soupe'
+	)
+AND id_ingredient = (
+	SELECT id_ingredient
+	FROM ingredient
+	WHERE nom_ingredient = 'Persil'
+	)
 
 -- F². Obélix s'est trompé : ce sont 35 casques Ostrogoths, et non Weisenau, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
 
