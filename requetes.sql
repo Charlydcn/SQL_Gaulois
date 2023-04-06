@@ -121,7 +121,15 @@ ORDER BY personnage.id_personnage
 
 -- Modification ********************************************************************************************************************************************************
 
+-- A². RETIREZ le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
+DELETE FROM personnage
+WHERE nom_personnage = 'Champdeblix'
+
 -- A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
+INSERT INTO personnage (id_personnage, nom_personnage, adresse_personnage, image_personnage, id_lieu, id_specialite)
+VALUES ('45', 'Champdeblix', 'Ferme Hantassion', 'indisponible.jpg', '6', '12')
+
+-- B². INTERDISSEZ Bonemine à boire de la potion magique
 
 
 -- B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
@@ -130,11 +138,20 @@ ORDER BY personnage.id_personnage
 -- C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
 
 
+-- D². Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
+
+
 -- D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
+
+
+-- E². La potion 'Soupe'  doit contenir du persil.
 
 
 -- E. La potion 'Soupe' ne doit plus contenir de persil.
 
 
--- F. Obélix s'est trompé : ce sont 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+-- F². Obélix s'est trompé : ce sont 42 casques Ostrogoths, et non Weisenau, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+
+
+-- F. Obélix s'est trompé (encore) : ce sont bien 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
 
