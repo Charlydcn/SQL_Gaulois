@@ -148,19 +148,35 @@ WHERE id_type_casque IN (
   FROM prendre_casque
 )
 
--- D². Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
-
+-- D². Modifiez l'adresse de Zérozérosix : il habite à 404 rue de l'ignorance à Lutèce
+UPDATE personnage
+SET adresse_personnage = "404 rue de l'ignorance",
+id_lieu = (
+	SELECT id_lieu
+	FROM lieu
+	WHERE nom_lieu = 'Babaorum'
+	)
+WHERE nom_personnage = 'Zérozérosix'
 
 -- D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
+UPDATE personnage
+SET adresse_personnage = "Prison",
+id_lieu = (
+	SELECT id_lieu
+	FROM lieu
+	WHERE nom_lieu = 'Condate'
+	)
+WHERE nom_personnage = 'Zérozérosix'
 
-
--- E². La potion 'Soupe'  doit contenir du persil.
+-- E². La potion 'Soupe' id 8 doit contenir du persil id 19. 
 
 
 -- E. La potion 'Soupe' ne doit plus contenir de persil.
 
 
--- F². Obélix s'est trompé : ce sont 42 casques Ostrogoths, et non Weisenau, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+-- F². Obélix s'est trompé : ce sont 35 casques Ostrogoths, et non Weisenau, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+
+
 
 
 -- F. Obélix s'est trompé (encore) : ce sont bien 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
