@@ -31,7 +31,12 @@ GROUP BY nom_bataille, date_bataille, nom_lieu
 ORDER BY date_bataille ASC
 
 -- 6. NOM DES POTIONS + COÛT DE RÉALISATION DE LA POTION (trié par coût décroissant)
-
+SELECT nom_potion AS 'Potion', SUM(qte * cout_ingredient) AS 'Coût de fabrication'
+FROM potion
+INNER JOIN composer ON potion.id_potion = composer.id_potion
+INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
+GROUP BY nom_potion
+ORDER BY SUM(qte * cout_ingredient) DESC
 
 -- 7. NOM DES INGRÉDIENTS + COÛT + QUANTITÉ DE CHAQUE INGRÉDIENT QUI COMPOSENT LA POTION 'Santé'
 
@@ -95,3 +100,10 @@ WHERE id_personnage NOT IN (
 GROUP BY nom_personnage
 
 -- 15. NOM DU/DES PERSONNAGE/S QUI N'ONT PAS LE DROIT DE BOIRE DE LA POTION 'Magique'
+SELECT nom_personnage AS "Personnes n'ayant pas le droit de boire de la potion 'Magique'"
+FROM personnage
+WHERE id_personnage NOT IN (
+	SELECT id_personnage
+	FROM autoriser_boire
+	WHERE id_potion = '1' 
+	)
