@@ -39,7 +39,12 @@ GROUP BY nom_potion
 ORDER BY SUM(qte * cout_ingredient) DESC
 
 -- 7. NOM DES INGRÉDIENTS + COÛT + QUANTITÉ DE CHAQUE INGRÉDIENT QUI COMPOSENT LA POTION 'Santé'
-
+SELECT nom_ingredient AS 'Ingrédient', cout_ingredient AS 'Coût', qte AS "Quantité"
+FROM potion
+INNER JOIN composer ON potion.id_potion = composer.id_potion
+INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
+WHERE nom_potion = 'Magique'
+GROUP BY nom_ingredient, qte, cout_ingredient
 
 -- 8. NOM DU/DES PERSONNAGES QUI ONT PRIS LE PLUS DE CASQUES DANS LA BATAILLE 'Bataille du village gaulois'.
 SELECT nom_personnage AS 'Personnage', nom_casque AS 'Nom du casque', nom_bataille AS 'Bataille', MAX(prendre_casque.qte) AS 'Nombre de casques'
