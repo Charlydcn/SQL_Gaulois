@@ -186,9 +186,41 @@ AND id_ingredient = (
 	)
 
 -- F². Obélix s'est trompé : ce sont 35 casques Ostrogoths, et non Weisenau, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+UPDATE prendre_casque
+SET id_casque = (
+	SELECT id_casque
+	FROM casque
+	WHERE nom_casque = 'Ostrogoth'
+	), 
+qte = '35'
 
-
-
+WHERE id_personnage = (
+	SELECT id_personnage
+	FROM personnage
+	WHERE nom_personnage = 'Obélix'
+	)
+AND id_bataille = (
+	SELECT id_bataille
+	FROM bataille
+	WHERE nom_bataille = 'Attaque de la banque postale'
+	)
 
 -- F. Obélix s'est trompé (encore) : ce sont bien 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+UPDATE prendre_casque
+SET id_casque = (
+	SELECT id_casque
+	FROM casque
+	WHERE nom_casque = 'Weisenau'
+	), 
+qte = '42'
 
+WHERE id_personnage = (
+	SELECT id_personnage
+	FROM personnage
+	WHERE nom_personnage = 'Obélix'
+	)
+AND id_bataille = (
+	SELECT id_bataille
+	FROM bataille
+	WHERE nom_bataille = 'Attaque de la banque postale'
+	)
