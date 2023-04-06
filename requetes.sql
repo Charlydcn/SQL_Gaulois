@@ -130,10 +130,12 @@ INSERT INTO personnage (id_personnage, nom_personnage, adresse_personnage, image
 VALUES ('45', 'Champdeblix', 'Ferme Hantassion', 'indisponible.jpg', '6', '12')
 
 -- B². INTERDISSEZ Bonemine à boire de la potion magique
-
+DELETE FROM autoriser_boire
+WHERE id_potion = '1' AND id_personnage = '12'
 
 -- B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
-
+INSERT INTO autoriser_boire (id_potion, id_personnage)
+VALUES ('1', '12')
 
 -- C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
 
