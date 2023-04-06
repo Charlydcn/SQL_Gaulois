@@ -1,3 +1,5 @@
+-- Requêtes ********************************************************************************************************************************************************
+
 -- 1. NOM DES LIEUX QUI FINISSENT PAR 'um'
 SELECT *
 FROM lieu
@@ -39,12 +41,13 @@ GROUP BY nom_potion
 ORDER BY SUM(qte * cout_ingredient) DESC
 
 -- 7. NOM DES INGRÉDIENTS + COÛT + QUANTITÉ DE CHAQUE INGRÉDIENT QUI COMPOSENT LA POTION 'Santé'
-SELECT nom_ingredient AS 'Ingrédient', cout_ingredient AS 'Coût', qte AS "Quantité"
+SELECT nom_ingredient AS 'Ingrédients de la potion Magique', cout_ingredient AS 'Coût', qte AS "Quantité"
 FROM potion
 INNER JOIN composer ON potion.id_potion = composer.id_potion
 INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
 WHERE nom_potion = 'Magique'
 GROUP BY nom_ingredient, qte, cout_ingredient
+ORDER BY cout_ingredient DESC
 
 -- 8. NOM DU/DES PERSONNAGES QUI ONT PRIS LE PLUS DE CASQUES DANS LA BATAILLE 'Bataille du village gaulois'.
 SELECT nom_personnage AS 'Personnage', nom_casque AS 'Nom du casque', nom_bataille AS 'Bataille', MAX(prendre_casque.qte) AS 'Nombre de casques'
@@ -52,7 +55,7 @@ FROM personnage
 INNER JOIN prendre_casque ON personnage.id_personnage = prendre_casque.id_personnage
 INNER JOIN casque ON prendre_casque.id_casque = casque.id_casque
 INNER JOIN bataille ON prendre_casque.id_bataille = bataille.id_bataille
-WHERE bataille.id_bataille = '1'
+WHERE bataille.nom_bataille = 'Bataille du village gaulois'
 GROUP BY prendre_casque.qte, nom_personnage, nom_casque, nom_bataille
 ORDER BY prendre_casque.qte DESC
 LIMIT 1
@@ -84,13 +87,13 @@ SELECT nom_potion AS 'Potion'
 FROM potion
 INNER JOIN composer ON potion.id_potion = composer.id_potion
 INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
-WHERE ingredient.id_ingredient = '24'
+WHERE ingredient.nom_ingredient = 'Poisson frais'
 
 -- 13. NOM DU/DES LIEU/X POSSÉDANT LE PLUS D'HABITANTS, EN DEHORS DU VILLAGE GAULOIS
 SELECT nom_lieu AS 'Lieu', COUNT(lieu.id_lieu) AS "Nombre d'habitant(s)"
 FROM lieu
 INNER JOIN personnage ON lieu.id_lieu = personnage.id_lieu
-WHERE NOT lieu.id_lieu = '1'
+WHERE NOT lieu.nom_lieu = 'Village gaulois'
 GROUP BY nom_lieu
 ORDER BY COUNT(lieu.id_lieu) DESC
 LIMIT 1
@@ -107,8 +110,31 @@ GROUP BY nom_personnage
 -- 15. NOM DU/DES PERSONNAGE/S QUI N'ONT PAS LE DROIT DE BOIRE DE LA POTION 'Magique'
 SELECT nom_personnage AS "Personnes n'ayant pas le droit de boire de la potion 'Magique'"
 FROM personnage
-WHERE id_personnage NOT IN (
+INNER JOIN autoriser_boire ON personnage.id_personnage = autoriser_boire.id_personnage
+WHERE personnage.id_personnage NOT IN (
 	SELECT id_personnage
 	FROM autoriser_boire
-	WHERE id_potion = '1' 
+	INNER JOIN potion ON autoriser_boire.id_potion = potion.id_potion
+	WHERE nom_potion = 'Magique' 
 	)
+ORDER BY personnage.id_personnage
+
+-- Modification ********************************************************************************************************************************************************
+
+-- A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
+
+
+-- B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
+
+
+-- C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
+
+
+-- D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
+
+
+-- E. La potion 'Soupe' ne doit plus contenir de persil.
+
+
+-- F. Obélix s'est trompé : ce sont 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+
